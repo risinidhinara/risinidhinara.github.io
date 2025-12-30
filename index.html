@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,228 +8,788 @@
 
   <!-- Modern clean & aesthetic style inspired by sensilab.monash.edu -->
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:Inter, sans-serif; }
-    body { background:#ffffff; color:#222; line-height:1.7; }
+    /* --- GOOGLE ANTIGRAVITY FONTS --- */
+    @font-face {
+      font-family: 'Google Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/googlesans/v67/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvQ.woff2) format('woff2');
+    }
 
-    /* --- SMOOTH SCROLL FOR MODERN FEEL --- */
-    html { scroll-behavior:smooth; }
+    @font-face {
+      font-family: 'Google Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/googlesans/v67/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvQ.woff2) format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Google Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/googlesans/v67/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvQ.woff2) format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Google Sans Code';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/googlesanscode/v14/pxiSyogzv91QhV44Z_GQBHsGf5PuckJMXr41HfVaiXFhgjF38LSsgg.woff2) format('woff2');
+    }
+
+    /* --- ANTIGRAVITY LIGHT THEME DESIGN SYSTEM --- */
+    :root {
+      /* Google Light Theme Tokens */
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --border: #dadce0;
+      --text-main: #202124;
+      --text-muted: #5f6368;
+      --accent: #1a73e8;
+      /* Google Blue */
+      --font-family: 'Google Sans', 'Inter', system-ui, sans-serif;
+      --shadow-card: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+      --shadow-hover: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: var(--font-family);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    p {
+      text-align: justify;
+    }
+
+    /* --- SMOOTH SCROLL --- */
+    html {
+      scroll-behavior: smooth;
+    }
 
     /* --- NAVIGATION --- */
     header {
-      width:100%; padding:20px 0; position:sticky; top:0;
-      background:#ffffffd9; backdrop-filter:blur(20px);
-      border-bottom:1px solid #eee; z-index:50;
+      width: 100%;
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
     }
-    nav {
-      max-width:1300px; margin:auto; padding:0 40px;
-      display:flex; align-items:center; justify-content:space-between;
-    }
-    nav a {
-      margin-left:22px; text-decoration:none; color:#333;
-      font-weight:500; font-size:15px;
-      transition:0.25s;
-    }
-    nav a:hover { color:#0071e3; }
 
-    /* --- HERO SECTION WITH MODERN VIBE --- */
-    .hero {
-      max-width:1300px; margin:90px auto 50px;
-      padding:0 40px; display:flex; align-items:center;
-      gap:55px;
+    nav {
+      max-width: 1300px;
+      margin: auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .hero img {
-      width:220px; height:220px; border-radius:18px;
-      object-fit:cover; filter:drop-shadow(0px 6px 18px #0002);
-      transition:0.4s;
+
+    nav strong {
+      color: var(--text-main);
+      font-size: 20px;
+      letter-spacing: -0.2px;
     }
-    .hero img:hover {
-      transform:scale(1.03);
+
+    nav a {
+      margin-left: 28px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 16px;
+      transition: 0.2s ease;
     }
-    .hero h1 { font-size:48px; font-weight:700; }
-    .hero p { font-size:20px; color:#555; margin-top:8px; }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* --- HERO SECTION --- */
+    /* --- HERO SPLIT --- */
+    .hero-split {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      max-width: 1300px;
+      margin: 80px auto;
+      padding: 0 40px;
+    }
+
+    .hero-image {
+      flex: 2;
+      /* 2/3 Width */
+      order: 1;
+      /* Image on Left */
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 550px;
+      /* Taller to fill space */
+      object-fit: cover;
+      border-radius: 48px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .hero-text {
+      flex: 1;
+      /* 1/3 Width */
+      order: 2;
+      /* Text on Right */
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 40px;
+    }
+
+    .hero-label {
+      font-size: 22px;
+      color: #5f6368;
+      /* Google Gray */
+      font-weight: 500;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      font-family: 'Google Sans', sans-serif;
+    }
+
+    .hero-text h1 {
+      font-size: 56px;
+      /* Large Headline */
+      font-weight: 500;
+      color: #202124;
+      /* Google Black */
+      margin-bottom: 0;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      font-family: 'Google Sans', sans-serif;
+    }
+
+    .hero-text p {
+      /* Reset defaults to avoid conflicts */
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .hero-split {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        margin-top: 40px;
+      }
+
+      .hero-image {
+        order: 0;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero-text {
+        order: 1;
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-image img {
+        height: 400px;
+      }
+    }
 
     /* --- SECTION TITLE --- */
     .section-title {
-      font-size:32px; font-weight:700; margin-bottom:25px;
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      display: inline-block;
     }
 
-    /* --- CLEAN MODERN SECTIONS --- */
+    .section-title::after {
+      display: none;
+    }
+
+    /* Remove dark mode line */
+
+    /* --- SECTIONS --- */
     section {
-      max-width:1300px; margin:80px auto; padding:0 40px;
+      max-width: 1300px;
+      margin: 80px auto;
+      padding: 0 40px;
     }
 
-    /* --- MODERN CONTENT BLOCKS --- */
+    /* --- CARDS / BLOCKS --- */
     .block {
-      background:#fafafa;
-      border:1px solid #e8e8e8;
-      border-radius:16px;
-      padding:30px 32px;
-      margin-bottom:20px;
-      transition:0.3s;
-    }
-    .block:hover {
-      background:#ffffff;
-      box-shadow:0 8px 25px rgba(0,0,0,0.06);
-      transform:translateY(-3px);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 32px;
+      margin-bottom: 16px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
 
-    .block h3 { margin-bottom:10px; font-size:22px; font-weight:600; }
-    .block ul { margin-left:22px; margin-top:10px; }
-    .block ul li { margin-bottom:6px; }
+    .block:hover {
+      background: var(--surface);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: transparent;
+    }
+
+    /* Project Thumbnail Image with negative margins to fill card width */
+
+
+    /* Project Thumbnail Image with negative margins to fill card width */
+    .block img.project-thumb {
+      width: calc(100% + 64px);
+      margin: -24px -32px 24px -32px;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border);
+      display: block;
+      border-radius: 8px 8px 0 0;
+      /* Ensure top corners match card */
+    }
+
+    .block h3 {
+      margin-bottom: 8px;
+      font-size: 19px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .block ul {
+      margin-left: 20px;
+      margin-top: 12px;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .block ul li {
+      margin-bottom: 6px;
+    }
+
+    .block strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* Special Styling for Achievements */
+    #achievements .block {
+      border-left: 4px solid var(--accent);
+    }
 
     footer {
-      margin-top:120px; padding:40px; text-align:center;
-      color:#777; border-top:1px solid #eee;
-      font-size:15px;
+      margin-top: 100px;
+      background: #ffffff;
+      border-top: 1px solid #dadce0;
+      padding: 40px 0;
     }
 
-    /* --- RESPONSIVE DESIGN --- */
-    @media (max-width:900px) {
-      .hero { flex-direction:column; text-align:center; }
-      .hero img { width:180px; height:180px; }
+    .footer-content {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /* Vertically align brand and links */
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      font-size: 24px;
+      font-weight: 500;
+      color: #70757a;
+      /* Google styled gray */
+      letter-spacing: -0.5px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .footer-links a {
+      color: #70757a;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .footer-links a:hover {
+      color: #3c4043;
+    }
+
+    @media (max-width: 768px) {
+      .footer-content {
+        flex-direction: column;
+        gap: 30px;
+      }
+    }
+
+    /* --- PROJECT GRID --- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      background: transparent;
+      border: none;
+      padding: 0;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .project-card img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      /* Square images like reference */
+      border-radius: 24px;
+      /* Large rounded corners */
+      object-fit: cover;
+      margin-bottom: 24px;
+      background-color: #f1f3f4;
+      border: 1px solid var(--border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover img {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .project-card h3 {
+      font-size: 24px;
+      font-weight: 400;
+      margin: 0 0 12px 0;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .project-card p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* --- EDUCATION GRID --- */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    /* --- SKILLS GRID --- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+
+      .edu-grid,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .edu-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .edu-chip {
+      background: #f1f3f4;
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .edu-card h3 {
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 12px;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .edu-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    /* --- RESPONSIVE --- */
+    .bio-text {
+      font-size: 16px;
+      /* Standard size matching other cards */
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .bio-text p {
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero img {
+        width: 140px;
+        height: 140px;
+        margin-bottom: 20px;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px;
+      }
+
+      nav div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      nav a {
+        margin: 0;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- NAV BAR -->
-<header>
-  <nav>
-    <strong style="font-size:22px">Risini Kumarasinghe</strong>
-    <div>
-      <a href="#about">About</a>
-      <a href="#education">Education</a>
-      <a href="#achievements">Achievements</a>
-      <a href="#projects">Projects</a>
-      <a href="#certifications">Certifications</a>
-      <a href="#experience">Experience</a>
-      <a href="#grants">Grants</a>
-      <a href="#competitions">Competitions</a>
-      <a href="#volunteering">Volunteering</a>
-      <a href="#skills">Skills</a>
+  <!-- NAV BAR -->
+  <header>
+    <nav>
+      <div style="font-size: 22px; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+        <!-- Logo Text Style -->
+        <span style="font-weight: 500;">Risini</span>
+        <span style="font-weight: 400; color: var(--text-muted);">Dinara Kumarasinghe</span>
+      </div>
+      <div>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO SPLIT -->
+  <section class="hero-split">
+    <div class="hero-text">
+      <div class="hero-label">Risini Dinara Kumarasinghe</div>
+      <h1>Passionate about Biomedical Engineering, Signal Processing & Neural Interfaces</h1>
     </div>
-  </nav>
-</header>
+    <div class="hero-image">
+      <img src="images/profile_v2.png" alt="Risini Dinara Kumarasinghe">
+    </div>
+  </section>
 
-<!-- HERO SECTION -->
-<section id="about" class="hero">
-  <img src="https://avatars.githubusercontent.com/u/168012198?v=4" alt="Profile Photo" />
-  <div>
-    <h1>Risini Dinara Kumarasinghe</h1>
-    <p>Biomedical Engineering Undergraduate — University of Moratuwa</p>
-  </div>
-</section>
+  <!-- BIOGRAPHY SECTION -->
+  <section id="about" style="margin-top: 40px;">
+    <div class="section-title">Biography</div>
+    <div class="bio-text">
+      <p>In my <strong>research experience</strong>, I worked as a <strong>Research Intern at the School of Computer
+          Science, University of Sydney</strong>. My work involved <strong>electrotactile stimulation for sensory
+          rehabilitation</strong>, including waveform design (monophasic, biphasic, sine, chirp) and <strong>real-time
+          multi-electrode control using precise PWM timing</strong>. I also explored <strong>Ear-EEG
+          acquisition</strong>, signal analysis techniques, and safety considerations for non-invasive monitoring, and
+        investigated <strong>mycelium-based conductive composites</strong> for biosensing and bioelectrical interface
+        stability.</p>
 
-<!-- EDUCATION -->
-<section id="education">
-  <div class="section-title">Education</div>
+      <p>Alongside research, I have contributed to <strong>biomedical product development</strong> through the
+        <strong>MeasureUP</strong> project, a <strong>World Bank–funded</strong> initiative to develop a portable human
+        height-measuring device for clinical settings. My role included algorithmic support for handling <strong>low
+          ultrasound reflection caused by dense scalp hair</strong> and mechanical enclosure design improvements,
+        providing hands-on exposure to <strong>medical device engineering and translational development</strong>.
+      </p>
 
-  <div class="block"><h3>University of Moratuwa (2022–Present)</h3>
-    B.Sc. Engineering (Hons.) in Biomedical Engineering — <strong>GPA: 3.86/4.0</strong>
-  </div>
+      <p>Academically, I maintain a <strong>GPA of 3.90/4.0</strong> and have been on the <strong>Dean’s List</strong>
+        for multiple semesters. I achieved <strong>All-Island 2nd place</strong> at GCE O/L and <strong>All-Island 73rd
+          place</strong> at GCE A/L, earning gold medals for academic excellence. My coursework and projects reflect a
+        strong foundation in <strong>DSP, adaptive filtering, time–frequency analysis, machine learning, and
+          multichannel biosignal analysis</strong>.</p>
 
-  <div class="block"><h3>Devi Balika Vidyalaya (2018–2020)</h3>
-    GCE A/L — <strong>4As</strong> · 73rd in country · Z-score: 2.65
-  </div>
+      <p>Beyond academics, I am currently involved in developing a <strong>non-invasive EEG-based BCI game for a
+          locked-in pediatric patient</strong>, focusing on <strong>signal processing pipelines, lightweight
+          classifiers, and user-specific adaptation</strong>. My broader interests lie at the intersection of
+        <strong>biomedical signal processing, wearable systems, and human-centered neurotechnology</strong>, with the
+        goal of building clinically meaningful, technically robust systems.
+      </p>
+    </div>
+  </section>
 
-  <div class="block"><h3>Samudradevi Balika Vidyalaya (2007–2017)</h3>
-    GCE O/L — <strong>9As</strong> · 2nd in country
-  </div>
-</section>
+  <!-- EDUCATION -->
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-title">Work Experience</div>
 
-<!-- ACHIEVEMENTS -->
-<section id="achievements">
-  <div class="section-title">Special Achievements</div>
+    <div style="margin-bottom: 40px;">
+      <h3 style="font-size: 20px; color: var(--text-main); font-weight: 500; margin-bottom: 8px;">Research Intern —
+        School of Computer Science, University of Sydney</h3>
+      <div style="color: var(--text-muted); margin-bottom: 12px; font-weight: 500;">Dec 2024 – Jul 2025 · Supervisor:
+        Dr. Anusha Withana</div>
+      <p style="color: var(--text-muted); line-height: 1.8;">
+        I conducted research on electrotactile stimulation systems for sensory rehabilitation, focusing on real-time
+        waveform generation and multi-electrode control. This involved designing and implementing monophasic, biphasic,
+        sine, and chirp stimulation patterns using precise PWM timing for embedded haptic interfaces. Additionally, I
+        investigated Ear-EEG signal acquisition, covering sensor placement strategies, signal quality analysis, and
+        safety considerations for non-invasive monitoring. I also designed and evaluated mycelium-based conductive
+        composites for biosensing applications, analyzing their bioelectrical conductivity and stability, while
+        contributing to the end-to-end research workflow from experimental design to technical documentation.
+      </p>
+    </div>
+  </section>
 
-  <div class="block">All-Island 2nd place in GCE O/L 2017 (≈300,000 candidates)</div>
-  <div class="block">Gold Medal — Best performance at GCE O/L (2017)</div>
-  <div class="block">Gold Medal — Best performance in Physical Science Stream (A/L 2020)</div>
-</section>
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-title">Education</div>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-title">Projects</div>
+    <div class="edu-grid">
+      <!-- Left Column: University -->
+      <div class="edu-card">
+        <span class="edu-chip">2022 – Present</span>
+        <h3>Bachelor of Science in Engineering (Honours) – Biomedical Engineering</h3>
+        <p><strong>University of Moratuwa, Sri Lanka</strong></p>
+        <p>GPA: 3.90 / 4.00 · Dean’s List: Semesters 1, 2, 4, 5, and 6</p>
+        <p style="font-size: 14px; margin-top: 8px; line-height: 1.6;">
+          <strong>Relevant Coursework:</strong> Biosignal Processing, Digital Signal Processing, Signals and Systems,
+          Pattern Recognition, Neural Networks, Medical Imaging, Modelling and Analysis of Physiological Systems,
+          Biomedical Device Design, Medical Electronics, Applied Statistics, Numerical Methods, Linear Algebra,
+          Differential Equations
+        </p>
+      </div>
 
-  <div class="block">
-    <h3>Human Height Measuring — Ultrasound Hair Reflection</h3>
-    <ul>
-      <li>Clustering algorithm to detect scalp reflection regions</li>
-      <li>Designed enclosure to improve accuracy during low-reflection conditions</li>
-    </ul>
-  </div>
+      <!-- Right Column: School Education -->
+      <div style="display: flex; flex-direction: column; gap: 40px;">
+        <!-- A/L -->
+        <div class="edu-card">
+          <span class="edu-chip">2020</span>
+          <h3>General Certificate of Education – Advanced Level (GCE A/L)</h3>
+          <p><strong>Devi Balika Vidyalaya, Colombo</strong></p>
+          <p>All-Island Rank: 73 out of ~34,389 candidates</p>
+          <p>Results: A passes in Mathematics, Physics, Chemistry, and English</p>
+          <p>Awards: <strong>Gold Medal</strong> for Best Performance at GCE A/L Examination</p>
+        </div>
 
-  <div class="block">
-    <h3>Medibox — IoT Embedded System</h3>
-    <ul>
-      <li>ESP32 programming & Node-RED dashboard design</li>
-      <li>MQTT protocol for communication</li>
-    </ul>
-  </div>
+        <!-- O/L -->
+        <div class="edu-card">
+          <span class="edu-chip">2017</span>
+          <h3>General Certificate of Education – Ordinary Level (GCE O/L)</h3>
+          <p><strong>Samudradevi Balika Vidyalaya</strong></p>
+          <p>All-Island Rank: 2 out of 312,464 candidates</p>
+          <p>Awards: <strong>Gold Medal</strong> for Best Performance at GCE O/L Examination</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="block">
-    <h3>Zero‑G Dynamic Body Weight Support System</h3>
-    <ul>
-      <li>Designed ergonomic wearable module</li>
-      <li>Industry-quality moldable enclosure</li>
-    </ul>
-  </div>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-title">Projects</div>
 
-  <div class="block">
-    <h3>Analog ECG Monitor</h3>
-    <ul>
-      <li>Fully analog ECG signal extraction</li>
-      <li>Noise reduction & advanced filtering</li>
-    </ul>
-  </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="https://picsum.photos/seed/bci/800/800" alt="BCI Project">
+        <h3>Brain–Computer Interface Game for a Locked-In Pediatric Patient (Ongoing)</h3>
+        <p>
+          This project focuses on developing a non-invasive EEG-based Brain–Computer Interface (BCI) that enables a
+          locked-in pediatric patient to interact with a simple computer game using brain signals alone. The work
+          involves designing robust EEG signal processing pipelines, implementing real-time feature extraction and
+          lightweight machine learning classifiers, and integrating patient-specific calibration strategies. A custom
+          dry-electrode EEG headset is being developed to improve comfort and signal quality, alongside a Unity-based
+          game interface tailored for gradual training and engagement.
+        </p>
+      </div>
 
-  <div class="block">
-    <h3>Modelling & Analysis of Physiological Systems</h3>
-    <ul>
-      <li>Cardiac modelling</li>
-      <li>Dendritic tree approximation</li>
-      <li>Hodgkin-Huxley modelling</li>
-      <li>Respiratory simulation</li>
-    </ul>
-  </div>
+      <div class="project-card">
+        <img src="https://picsum.photos/seed/signals/800/800" alt="Signal Processing">
+        <h3>Bio-signal Processing and Analysis (ECG and Biomedical Signals)</h3>
+        <p>
+          This project involved implementing end-to-end biomedical signal processing pipelines for ECG and related
+          physiological signals using MATLAB. Key contributions include the design and evaluation of digital filters
+          (FIR, IIR, moving average, comb), adaptive filtering techniques (LMS, RLS, Wiener) for non-stationary noise
+          suppression, and wavelet-based time–frequency analysis for feature exploration. The work emphasized
+          reproducibility through reusable scripts and experimental validation.
+        </p>
+      </div>
 
-  <div class="block">
-    <h3>Vein Finder Device</h3>
-    A medical device assisting accurate vein location for clinical work.
-  </div>
+      <div class="project-card">
+        <img src="https://picsum.photos/seed/ecg_analog/800/800" alt="Analog ECG">
+        <h3>Analog ECG Monitoring System</h3>
+        <p>
+          A fully analog ECG acquisition system was designed and implemented using wet electrodes and discrete
+          electronic components. The project focused on low-noise analog front-end design, including amplification,
+          band-pass filtering, and power-line interference mitigation. The system successfully extracted clinically
+          interpretable ECG waveforms, providing strong practical grounding in biomedical instrumentation and analog
+          signal conditioning.
+        </p>
+      </div>
 
-  <div class="block">
-    <h3>Linear Power Supply Design</h3>
-    <ul>
-      <li>Designed for continuous line-voltage variation</li>
-      <li>Includes current-limiting circuitry</li>
-    </ul>
-  </div>
+      <div class="project-card">
+        <img src="https://picsum.photos/seed/ultrasound/800/800" alt="Ultrasound Project">
+        <h3>Human Height Measurement Under Low Ultrasound Reflection of Scalp Hair</h3>
+        <p>
+          This project addressed the challenge of unreliable ultrasound-based height measurements caused by dense scalp
+          hair. The work included contributing to data clustering approaches to separate valid reflections from noise
+          and designing an improved mechanical enclosure to enhance sensor alignment and measurement stability. The
+          project formed part of the MeasureUP initiative and progressed toward a deployable clinical device.
+        </p>
+      </div>
 
-  <div class="block">
-    <h3>UART Transceiver — FPGA</h3>
-    Implemented fully in Verilog HDL.
-  </div>
+      <div class="project-card">
+        <img src="https://picsum.photos/seed/rehab/800/800" alt="Zero-G System">
+        <h3>Zero-Gravity Dynamic Body-Weight Support System</h3>
+        <p>
+          This ongoing project involves the development of a motorized body-weight support system for rehabilitation
+          applications. Contributions focus on designing the wearable interface, prioritizing patient comfort, load
+          distribution, and adjustability. The work includes enclosure design and mold development aligned with industry
+          standards, supporting safe and repeatable use in clinical rehabilitation settings.
+        </p>
+      </div>
 
-  <div class="block">
-    <h3>PLC Enclosure Design</h3>
-    Functional enclosure + mold design using SolidWorks.
-  </div>
-</section>
+      <div class="project-card">
+        <img src="https://picsum.photos/seed/simulation/800/800" alt="Physiological Modelling">
+        <h3>Modelling and Analysis of Physiological Systems</h3>
+        <p>
+          This project explored mathematical and computational models of physiological processes, including cardiac
+          electrophysiology, neuronal dynamics, and respiratory mechanics. Key components included dendritic tree
+          approximations, Hodgkin–Huxley modeling, compartmental system analysis, and simulation-based evaluation of
+          system behavior, strengthening foundations in physiology-informed modeling.
+        </p>
+      </div>
+    </div>
+  </section>
 
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-  <div class="section-title">Certifications</div>
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-title">Skills</div>
 
-  <div class="block">CIMA Certificate in Business Accounting (2021)</div>
-  <div class="block">Deep Learning Specialization — DeepLearning.AI (2024)</div>
-  <div class="block">Machine Learning Specialization — DeepLearning.AI (2024)</div>
-  <div class="block">Embedded Machine Learning for Edge Computing — SkillSurf.lk (In Progress)</div>
-</section>
+    <div class="skills-grid">
+      <!-- 1. Programming -->
+      <div class="edu-card">
+        <span class="edu-chip">Languages</span>
+        <h3>Programming & Scientific Computing</h3>
+        <p>Python, MATLAB, C, C++</p>
+      </div>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-title">Work Experience</div>
+      <!-- 2. Signal Processing -->
+      <div class="edu-card">
+        <span class="edu-chip">Core</span>
+        <h3>Signal Processing & Machine Learning</h3>
+        <p>Digital Signal Processing (DSP), Biosignal Processing (EEG, ECG), Wavelet Transforms, Adaptive Filtering,
+          Deep Learning (CNNs, RNNs)</p>
+      </div>
 
-  <div class="block">
-    <h3>SolidWorks Designer — MeasureUP Project (2023–Present)</h3>
-    <ul>
+      <!-- 3. Embedded -->
+      <div class="edu-card">
+        <span class="edu-chip">Hardware</span>
+        <h3>Embedded Systems & Hardware</h3>
+        <p>Embedded C++, Microcontrollers, PWM Waveform Generation, Real-Time Control, Analog Front-End Design, Haptic
+          Systems</p>
+      </div>
+
+      <!-- 4. Biomedical -->
+      <div class="edu-card">
+        <span class="edu-chip">Domain</span>
+        <h3>Biomedical & Physiological Analysis</h3>
+        <p>Physiological Modelling, Neural Signal Analysis, Noise Modeling, Non-Invasive Sensing, Rehabilitation Tech
+        </p>
+      </div>
+
+      <!-- 5. Software Tools -->
+      <div class="edu-card">
+        <span class="edu-chip">Tools</span>
+        <h3>Software Tools & Frameworks</h3>
+        <p>NumPy, SciPy, Pandas, PyTorch, TensorFlow, MATLAB Toolbox, Unity, Git</p>
+      </div>
+
+      <!-- 6. Design -->
+      <div class="edu-card">
+        <span class="edu-chip">Design</span>
+        <h3>Design & Documentation</h3>
+        <p>SolidWorks (Enclosures), Rapid Prototyping, Technical Documentation, LaTeX</p>
+      </div>
+
+      <!-- 7. Research -->
+      <div class="edu-card">
+        <span class="edu-chip">Research</span>
+        <h3>Research & Engineering Practices</h3>
+        <p>Experimental Design, Data Analysis, Algorithm Validation, Reproducible Research</p>
+      </div>
+
+      <!-- 8. Languages -->
+      <div class="edu-card">
+        <span class="edu-chip">Communication</span>
+        <h3>Languages</h3>
+        <p>English (Professional Proficiency), Sinhala (Native)</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">Risini Dinara Kumarasinghe</div>
+      <div class="footer-links">
+        <a href="https://github.com/risinidhinara" target="_blank">GitHub</a>
+        <a href="mailto:risinidhinara@gmail.com">risinidhinara@gmail.com</a>
+        <a href="https://www.linkedin.com/in/risini-kumarasinghe-b0a773285" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
