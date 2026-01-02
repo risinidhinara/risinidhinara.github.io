@@ -146,7 +146,94 @@
       /* Taller to fill space */
       object-fit: cover;
       border-radius: 48px;
+    }
+
+    /* --- HERO OVERLAY --- */
+    .hero-img-container {
+      position: relative;
+      width: 100%;
+      border-radius: 48px;
+      overflow: hidden;
       box-shadow: var(--shadow-card);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      /* Darker consistent overlay */
+      display: flex;
+      align-items: center;
+      /* Center Vertically */
+      justify-content: center;
+      /* Center Horizontally */
+      opacity: 1;
+      padding-bottom: 0;
+      /* Remove padding */
+    }
+
+    .hero-overlay span {
+      color: #ffffff;
+      font-size: 36px;
+      /* Larger font */
+      font-weight: 400;
+      /* Regular weight like reference */
+      letter-spacing: -0.5px;
+      font-family: 'Google Sans', sans-serif;
+
+      /* Typing Effect */
+      display: inline-block;
+      overflow: hidden;
+      /* Ensures content is not revealed until animation */
+      border-right: 3px solid #ffffff;
+      /* The typing cursor */
+      white-space: nowrap;
+      /* Keeps content on a single line */
+      margin: 0;
+      /* Remove auto margin to reduce jitter */
+      width: 0;
+      max-width: fit-content;
+      /* Ensure it fits content naturally */
+      animation:
+        typing 4s steps(40, end) forwards,
+        blink-caret .75s step-end infinite;
+    }
+
+    /* The typing effect */
+    @keyframes typing {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 35ch;
+      }
+    }
+
+    @keyframes typing-usyd {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 22ch;
+      }
+    }
+
+    /* The typewriter cursor effect */
+    @keyframes blink-caret {
+
+      from,
+      to {
+        border-color: transparent
+      }
+
+      50% {
+        border-color: #ffffff;
+      }
     }
 
     .hero-text {
@@ -237,6 +324,91 @@
       max-width: 1300px;
       margin: 80px auto;
       padding: 0 40px;
+    }
+
+    /* --- CAROUSEL --- */
+    .carousel-scroll {
+      display: flex;
+      width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 20px;
+      /* Add space between cards */
+      padding: 0 0 24px 0;
+      /* Add bottom padding for shadow visibility */
+      scrollbar-width: none;
+    }
+
+    .carousel-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      /* Widescreen shape like reference */
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-item {
+      min-width: 85%;
+      /* Allow next card to peek */
+      scroll-snap-align: center;
+      /* Center the active card */
+      flex: 0 0 85%;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    /* Optional: Scale effect for focus */
+    .carousel-container {
+      position: relative;
+      margin-bottom: 24px;
+      /* removed container radius/shadow */
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      transition: all 0.2s ease;
+      opacity: 0;
+      /* Hidden by default, shown on hover */
+    }
+
+    .carousel-container:hover .carousel-btn {
+      opacity: 1;
+    }
+
+    .carousel-btn:hover {
+      background: white;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-btn.prev {
+      left: 20px;
+    }
+
+    .carousel-btn.next {
+      right: 20px;
+    }
+
+    .carousel-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: #202124;
     }
 
     /* --- CARDS / BLOCKS --- */
@@ -371,7 +543,7 @@
 
     .project-card img {
       width: 100%;
-      aspect-ratio: 1/1;
+      aspect-ratio: 3/2;
       /* Square images like reference */
       border-radius: 24px;
       /* Large rounded corners */
@@ -534,7 +706,12 @@
       <h1>Passionate about Biomedical Engineering, Signal Processing & Neural Interfaces</h1>
     </div>
     <div class="hero-image">
-      <img src="images/profile_v2.png" alt="Risini Dinara Kumarasinghe">
+      <div class="hero-img-container">
+        <img src="images/profile_v2.png" alt="Risini Dinara Kumarasinghe" class="carousel-image">
+        <div class="hero-overlay">
+          <span>Hi, I'm Risini Dinara Kumarasinghe</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -542,6 +719,13 @@
   <section id="about" style="margin-top: 40px;">
     <div class="section-title">Biography</div>
     <div class="bio-text">
+      <p>
+        I am a <strong>Biomedical Engineering undergraduate</strong> at the <strong>University of Moratuwa, Sri
+          Lanka</strong>, deeply passionate about the intersection of engineering and medicine. My interests primarily
+        lie
+        in <strong>biomedical signal processing, neural engineering, and wearable healthcare systems</strong>, where I
+        strive to develop innovative solutions that bridge the gap between technology and clinical rehabilitation.
+      </p>
       <p>In my <strong>research experience</strong>, I worked as a <strong>Research Intern at the School of Computer
           Science, University of Sydney</strong>. My work involved <strong>electrotactile stimulation for sensory
           rehabilitation</strong>, including waveform design (monophasic, biphasic, sine, chirp) and <strong>real-time
@@ -578,20 +762,67 @@
     <div class="section-title">Work Experience</div>
 
     <div style="margin-bottom: 40px;">
-      <h3 style="font-size: 20px; color: var(--text-main); font-weight: 500; margin-bottom: 8px;">Research Intern —
-        School of Computer Science, University of Sydney</h3>
-      <div style="color: var(--text-muted); margin-bottom: 12px; font-weight: 500;">Dec 2024 – Jul 2025 · Supervisor:
-        Dr. Anusha Withana</div>
-      <p style="color: var(--text-muted); line-height: 1.8;">
-        I conducted research on electrotactile stimulation systems for sensory rehabilitation, focusing on real-time
-        waveform generation and multi-electrode control. This involved designing and implementing monophasic, biphasic,
-        sine, and chirp stimulation patterns using precise PWM timing for embedded haptic interfaces. Additionally, I
-        investigated Ear-EEG signal acquisition, covering sensor placement strategies, signal quality analysis, and
-        safety considerations for non-invasive monitoring. I also designed and evaluated mycelium-based conductive
-        composites for biosensing applications, analyzing their bioelectrical conductivity and stability, while
-        contributing to the end-to-end research workflow from experimental design to technical documentation.
-      </p>
-    </div>
+      <div style="margin-bottom: 40px;">
+        <!-- Carousel Wrapper -->
+        <div class="carousel-container">
+          <button class="carousel-btn prev" onclick="scrollCarousel(this, -1)">
+            <svg viewBox="0 0 24 24">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+            </svg>
+          </button>
+          <button class="carousel-btn next" onclick="scrollCarousel(this, 1)">
+            <svg viewBox="0 0 24 24">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg>
+          </button>
+
+          <div class="carousel-scroll">
+
+            <!-- Slide 1: Main Profile Style Image -->
+            <div class="carousel-item">
+              <div class="hero-img-container">
+                <!-- Radius handled by wrapper -->
+                <img src="images/usyd_experience.jpg" alt="University of Sydney" class="carousel-image">
+                <div class="hero-overlay">
+                  <span
+                    style="animation: typing-usyd 3s steps(25, end) forwards, blink-caret .75s step-end infinite;">Research
+                    Intern @ USYD</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: Team Image 1 -->
+            <div class="carousel-item">
+              <div class="hero-img-container">
+                <img src="images/usyd_team_1.jpg" alt="USYD Team 1" class="carousel-image">
+                <!-- No overlay for team photos unless requested, keeping clean -->
+              </div>
+            </div>
+
+            <!-- Slide 3: Team Image 2 -->
+            <div class="carousel-item">
+              <div class="hero-img-container">
+                <img src="images/usyd_team_2.jpg" alt="USYD Team 2" class="carousel-image">
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <h3 style="font-size: 20px; color: var(--text-main); font-weight: 500; margin-bottom: 8px;">Research Intern —
+          School of Computer Science, University of Sydney</h3>
+        <div style="color: var(--text-muted); margin-bottom: 12px; font-weight: 500;">Dec 2024 – Jul 2025 · Supervisor:
+          Dr. Anusha Withana</div>
+        <p style="color: var(--text-muted); line-height: 1.8;">
+          I conducted research on electrotactile stimulation systems for sensory rehabilitation, focusing on real-time
+          waveform generation and multi-electrode control. This involved designing and implementing monophasic,
+          biphasic,
+          sine, and chirp stimulation patterns using precise PWM timing for embedded haptic interfaces. Additionally, I
+          investigated Ear-EEG signal acquisition, covering sensor placement strategies, signal quality analysis, and
+          safety considerations for non-invasive monitoring. I also designed and evaluated mycelium-based conductive
+          composites for biosensing applications, analyzing their bioelectrical conductivity and stability, while
+          contributing to the end-to-end research workflow from experimental design to technical documentation.
+        </p>
+      </div>
   </section>
 
   <!-- EDUCATION -->
@@ -643,21 +874,19 @@
 
     <div class="projects-grid">
       <div class="project-card">
-        <img src="https://picsum.photos/seed/bci/800/800" alt="BCI Project">
+        <img src="images/bci_headset.jpg" alt="BCI Project">
         <h3>Brain–Computer Interface Game for a Locked-In Pediatric Patient (Ongoing)</h3>
         <p>
-          This project focuses on developing a non-invasive EEG-based Brain–Computer Interface (BCI) that enables a
-          locked-in pediatric patient to interact with a simple computer game using brain signals alone. The work
-          involves designing robust EEG signal processing pipelines, implementing real-time feature extraction and
-          lightweight machine learning classifiers, and integrating patient-specific calibration strategies. A custom
-          dry-electrode EEG headset is being developed to improve comfort and signal quality, alongside a Unity-based
-          game interface tailored for gradual training and engagement.
+          Developing a non-invasive EEG-based BCI that enables a locked-in pediatric patient to play computer games. Key
+          contributions include designing robust signal processing pipelines, real-time lightweight classifiers, and
+          patient-specific calibration. Additionally, a custom dry-electrode headset and Unity-based game interface are
+          being built to ensure comfort and effective training.
         </p>
       </div>
 
       <div class="project-card">
-        <img src="https://picsum.photos/seed/signals/800/800" alt="Signal Processing">
-        <h3>Bio-signal Processing and Analysis (ECG and Biomedical Signals)</h3>
+        <img src="images/biosignal_processing.png" alt="Signal Processing">
+        <h3>Bio-signal Processing and Analysis</h3>
         <p>
           This project involved implementing end-to-end biomedical signal processing pipelines for ECG and related
           physiological signals using MATLAB. Key contributions include the design and evaluation of digital filters
@@ -668,7 +897,7 @@
       </div>
 
       <div class="project-card">
-        <img src="https://picsum.photos/seed/ecg_analog/800/800" alt="Analog ECG">
+        <img src="images/analog_ecg_monitor.png" alt="Analog ECG">
         <h3>Analog ECG Monitoring System</h3>
         <p>
           A fully analog ECG acquisition system was designed and implemented using wet electrodes and discrete
@@ -680,7 +909,7 @@
       </div>
 
       <div class="project-card">
-        <img src="https://picsum.photos/seed/ultrasound/800/800" alt="Ultrasound Project">
+        <img src="images/height_measurement.png" alt="Ultrasound Project">
         <h3>Human Height Measurement Under Low Ultrasound Reflection of Scalp Hair</h3>
         <p>
           This project addressed the challenge of unreliable ultrasound-based height measurements caused by dense scalp
@@ -691,7 +920,7 @@
       </div>
 
       <div class="project-card">
-        <img src="https://picsum.photos/seed/rehab/800/800" alt="Zero-G System">
+        <img src="images/zero_gravity.png" alt="Zero-G System">
         <h3>Zero-Gravity Dynamic Body-Weight Support System</h3>
         <p>
           This ongoing project involves the development of a motorized body-weight support system for rehabilitation
@@ -702,7 +931,7 @@
       </div>
 
       <div class="project-card">
-        <img src="https://picsum.photos/seed/simulation/800/800" alt="Physiological Modelling">
+        <img src="images/physiological_modelling.png" alt="Physiological Modelling">
         <h3>Modelling and Analysis of Physiological Systems</h3>
         <p>
           This project explored mathematical and computational models of physiological processes, including cardiac
@@ -780,6 +1009,16 @@
       </div>
     </div>
   </footer>
+  <script>
+    function scrollCarousel(btn, direction) {
+      const container = btn.parentElement.querySelector('.carousel-scroll');
+      const scrollAmount = container.clientWidth;
+      container.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  </script>
 </body>
 
 </html>
