@@ -541,22 +541,50 @@
       color: inherit;
     }
 
-    .project-card img {
+    .project-img-container {
+      position: relative;
       width: 100%;
       aspect-ratio: 3/2;
-      /* Square images like reference */
       border-radius: 24px;
-      /* Large rounded corners */
-      object-fit: cover;
+      overflow: hidden;
       margin-bottom: 24px;
-      background-color: #f1f3f4;
       border: 1px solid var(--border);
+      background-color: #f1f3f4;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .project-card:hover img {
+    .project-card:hover .project-img-container {
       transform: translateY(-4px);
       box-shadow: var(--shadow-hover);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    .project-overlay span {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.3;
+      font-family: 'Google Sans', sans-serif;
     }
 
     .project-card h3 {
@@ -863,8 +891,14 @@
 
     <div class="projects-grid">
       <div class="project-card">
-        <img src="images/bci_headset.jpg" alt="BCI Project">
-        <h3>Brain–Computer Interface Game for a Locked-In Pediatric Patient (Ongoing)</h3>
+        <a href="https://github.com/fyp21-bci" target="_blank" style="text-decoration: none;">
+          <div class="project-img-container">
+            <img src="images/bci_headset.jpg" alt="BCI Project">
+            <div class="project-overlay">
+              <span>Brain–Computer Interface Game for a Locked-In Pediatric Patient (Ongoing)</span>
+            </div>
+          </div>
+        </a>
         <p>
           Developing a non-invasive EEG-based BCI that enables a locked-in pediatric patient to play computer games. Key
           contributions include designing robust signal processing pipelines, real-time lightweight classifiers, and
@@ -874,8 +908,15 @@
       </div>
 
       <div class="project-card">
-        <img src="images/biosignal_processing.png" alt="Signal Processing">
-        <h3>Bio-signal Processing and Analysis</h3>
+        <a href="https://github.com/risinidhinara/Bio-signal-Processing-" target="_blank"
+          style="text-decoration: none;">
+          <div class="project-img-container">
+            <img src="images/biosignal_processing.png" alt="Signal Processing">
+            <div class="project-overlay">
+              <span>Bio-signal Processing and Analysis</span>
+            </div>
+          </div>
+        </a>
         <p>
           This project involved implementing end-to-end biomedical signal processing pipelines for ECG and related
           physiological signals using MATLAB. Key contributions include the design and evaluation of digital filters
@@ -886,8 +927,15 @@
       </div>
 
       <div class="project-card">
-        <img src="images/analog_ecg_monitor.png" alt="Analog ECG">
-        <h3>Analog ECG Monitoring System</h3>
+        <a href="https://github.com/chathuracns/ECG-Signal-Extracting-and-Monitoring-Using-Analog-Electronics-and-wet-electrodes"
+          target="_blank" style="text-decoration: none;">
+          <div class="project-img-container">
+            <img src="images/analog_ecg_monitor.png" alt="Analog ECG">
+            <div class="project-overlay">
+              <span>Analog ECG Monitoring System</span>
+            </div>
+          </div>
+        </a>
         <p>
           Designed and implemented a fully analog ECG acquisition system using discrete components and wet electrodes.
           The project involved developing a low-noise analog front-end with precision instrumentation amplifiers, active
@@ -897,8 +945,15 @@
       </div>
 
       <div class="project-card">
-        <img src="images/height_measurement.png" alt="Ultrasound Project">
-        <h3>Human Height Measurement Under Low Ultrasound Reflection of Scalp Hair</h3>
+        <a href="https://github.com/chathuracns/Human-Height-Measuring-Under-Low-Ultrasound-Reflection-due-to-Dense-Scalp-Hair"
+          target="_blank" style="text-decoration: none;">
+          <div class="project-img-container">
+            <img src="images/height_measurement.png" alt="Ultrasound Project">
+            <div class="project-overlay">
+              <span>Human Height Measurement Under Low Ultrasound Reflection of Scalp Hair</span>
+            </div>
+          </div>
+        </a>
         <p>
           This project addressed the challenge of unreliable ultrasound-based height measurements caused by dense scalp
           hair. The work included contributing to data clustering approaches to separate valid reflections from noise
@@ -908,8 +963,15 @@
       </div>
 
       <div class="project-card">
-        <img src="images/zero_gravity.png" alt="Zero-G System">
-        <h3>Zero-Gravity Dynamic Body-Weight Support System</h3>
+        <a href="https://github.com/chathuracns/Zero-G-Dynamic-Body-Weight-Support-System-Using-a-Motorized-Unloader"
+          target="_blank" style="text-decoration: none;">
+          <div class="project-img-container">
+            <img src="images/zero_gravity.png" alt="Zero-G System">
+            <div class="project-overlay">
+              <span>Zero-Gravity Dynamic Body-Weight Support System</span>
+            </div>
+          </div>
+        </a>
         <p>
           Developing a motorized zero-gravity body-weight support system for rehabilitation designed to counteract
           gravity and minimize lifting effort. Technical contributions include implementing a closed-loop control system
@@ -920,8 +982,15 @@
       </div>
 
       <div class="project-card">
-        <img src="images/physiological_modelling.png" alt="Physiological Modelling">
-        <h3>Modelling and Analysis of Physiological Systems</h3>
+        <a href="https://github.com/risinidhinara/Modelling-and-Analysis-of-Physiological-systems" target="_blank"
+          style="text-decoration: none;">
+          <div class="project-img-container">
+            <img src="images/physiological_modelling.png" alt="Physiological Modelling">
+            <div class="project-overlay">
+              <span>Modelling and Analysis of Physiological Systems</span>
+            </div>
+          </div>
+        </a>
         <p>
           Implemented mathematical and computational models to simulate physiological dynamics across cardiac
           electrophysiology, neuronal networks, and respiratory mechanics. Technical contributions focused on developing
