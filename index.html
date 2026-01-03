@@ -142,17 +142,19 @@
 
     .hero-image img {
       width: 100%;
-      height: 550px;
-      /* Taller to fill space */
+      height: auto;
+      max-height: 550px;
+      aspect-ratio: 3/2;
+      /* Better aspect ratio to reduce crop */
       object-fit: cover;
-      border-radius: 48px;
+      border-radius: 32px;
     }
 
     /* --- HERO OVERLAY --- */
     .hero-img-container {
       position: relative;
       width: 100%;
-      border-radius: 48px;
+      border-radius: 32px;
       overflow: hidden;
       box-shadow: var(--shadow-card);
     }
@@ -177,8 +179,8 @@
 
     .hero-overlay span {
       color: #ffffff;
-      font-size: 36px;
-      /* Larger font */
+      font-size: 32px;
+      /* Slightly smaller to fit better */
       font-weight: 400;
       /* Regular weight like reference */
       letter-spacing: -0.5px;
@@ -345,8 +347,8 @@
 
     .carousel-image {
       width: 100%;
-      aspect-ratio: 16/9;
-      /* Widescreen shape like reference */
+      aspect-ratio: 3/2;
+      /* Adjusted to 3:2 to reduce vertical cropping */
       object-fit: cover;
       display: block;
     }
@@ -493,11 +495,22 @@
     }
 
     .footer-brand {
-      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .footer-brand span:first-child {
+      font-size: 22px;
+      color: var(--text-main);
       font-weight: 500;
-      color: #70757a;
-      /* Google styled gray */
-      letter-spacing: -0.5px;
+    }
+
+    .footer-brand span:last-child {
+      font-size: 22px;
+      color: var(--text-muted);
+      font-weight: 400;
     }
 
     .footer-links {
@@ -670,38 +683,133 @@
       margin-bottom: 16px;
     }
 
+    /* --- MOBILE NAVIGATION --- */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+
+    .bar {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px auto;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      background-color: var(--text-main);
+    }
+
+    /* --- RESPONSIVE OPTIMIZATIONS --- */
     @media (max-width: 900px) {
-      .hero {
+      .hero-split {
         flex-direction: column;
         text-align: center;
+        gap: 40px;
         margin-top: 40px;
       }
 
-      .hero h1 {
-        font-size: 36px;
-      }
-
-      .hero img {
-        width: 140px;
-        height: 140px;
-        margin-bottom: 20px;
-      }
-
-      nav {
-        flex-direction: column;
-        gap: 20px;
-        padding: 15px;
-      }
-
-      nav div {
-        display: flex;
-        flex-wrap: wrap;
+      .hero-image {
+        order: 0;
+        width: 100%;
         justify-content: center;
-        gap: 15px;
       }
 
-      nav a {
-        margin: 0;
+      .hero-text {
+        order: 1;
+        width: 100%;
+        padding-left: 0;
+        text-align: center;
+      }
+
+      .hero-image img {
+        height: 400px;
+      }
+
+      .hero-label {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      /* Mobile Menu */
+      .hamburger {
+        display: block;
+      }
+
+      .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+
+      .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 72px;
+        /* Approx header height */
+        gap: 0;
+        flex-direction: column;
+        background-color: #fff;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px 0;
+        z-index: 99;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .nav-links a {
+        margin: 16px 0;
+        display: block;
+        font-size: 18px;
+        margin-left: 0;
+        /* Reset margin */
+      }
+
+      /* Font & Image Sizing */
+      .hero-text h1 {
+        font-size: 34px;
+        /* Reduced for mobile */
+      }
+
+      .hero-label {
+        font-size: 18px;
+      }
+
+      .hero-image img {
+        height: auto;
+        max-height: 350px;
+        border-radius: 32px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+      }
+
+      /* Ensure overlays are readable on mobile */
+      .project-overlay span {
+        font-size: 18px;
+      }
+
+      .project-img-container {
+        border-radius: 16px;
       }
     }
   </style>
@@ -712,17 +820,26 @@
   <!-- NAV BAR -->
   <header>
     <nav>
-      <div style="font-size: 22px; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+      <div
+        style="font-size: 22px; color: var(--text-main); display: flex; align-items: center; gap: 6px; cursor: pointer;"
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
         <!-- Logo Text Style -->
         <span style="font-weight: 500;">Risini</span>
         <span style="font-weight: 400; color: var(--text-muted);">Dinara Kumarasinghe</span>
       </div>
-      <div>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
+
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+
+      <div class="nav-links">
+        <a href="#about" onclick="closeMenu()">About</a>
+        <a href="#experience" onclick="closeMenu()">Research Experience</a>
+        <a href="#education" onclick="closeMenu()">Education</a>
+        <a href="#projects" onclick="closeMenu()">Projects</a>
+        <a href="#skills" onclick="closeMenu()">Skills</a>
       </div>
     </nav>
   </header>
@@ -776,7 +893,7 @@
   <!-- EDUCATION -->
   <!-- EXPERIENCE -->
   <section id="experience">
-    <div class="section-title">Work Experience</div>
+    <div class="section-title">Research Experience</div>
 
     <div style="margin-bottom: 40px;">
       <div style="margin-bottom: 40px;">
@@ -1060,7 +1177,10 @@
 
   <footer>
     <div class="footer-content">
-      <div class="footer-brand">Risini Dinara Kumarasinghe</div>
+      <div class="footer-brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <span>Risini</span>
+        <span>Dinara Kumarasinghe</span>
+      </div>
       <div class="footer-links">
         <a href="https://github.com/risinidhinara" target="_blank">GitHub</a>
         <a href="mailto:risinidhinara@gmail.com">risinidhinara@gmail.com</a>
@@ -1069,6 +1189,19 @@
     </div>
   </footer>
   <script>
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      navLinks.classList.toggle("active");
+    });
+
+    function closeMenu() {
+      hamburger.classList.remove("active");
+      navLinks.classList.remove("active");
+    }
+
     function scrollCarousel(btn, direction) {
       const container = btn.parentElement.querySelector('.carousel-scroll');
       const item = container.querySelector('.carousel-item');
