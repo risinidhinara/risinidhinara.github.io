@@ -100,10 +100,26 @@
       justify-content: space-between;
     }
 
-    nav strong {
+    /* --- BRAND STYLES --- */
+    .brand-container {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
       color: var(--text-main);
-      font-size: 20px;
-      letter-spacing: -0.2px;
+      font-size: 22px;
+      text-decoration: none;
+      /* Ensure no underline if it becomes an anchor */
+    }
+
+    .brand-first {
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .brand-last {
+      font-weight: 400;
+      color: var(--text-muted);
     }
 
     nav a {
@@ -737,6 +753,31 @@
         display: block;
       }
 
+      /* Better Mobile Brand Sizing */
+      .brand-container {
+        font-size: 18px;
+        flex-wrap: wrap;
+        row-gap: 0px;
+        max-width: 75%;
+        line-height: 1.2;
+      }
+
+      .brand-first,
+      .brand-last {
+        display: inline-block;
+      }
+
+      .footer-brand {
+        flex-direction: column;
+        /* Vertical stack for footer brand */
+        gap: 4px;
+        font-size: 20px !important;
+      }
+
+      .footer-brand span {
+        font-size: 20px !important;
+      }
+
       .hamburger.active .bar:nth-child(2) {
         opacity: 0;
       }
@@ -752,17 +793,27 @@
       .nav-links {
         position: fixed;
         left: -100%;
-        top: 72px;
-        /* Approx header height */
-        gap: 0;
+        top: 58px;
+        height: calc(100vh - 58px);
+        /* Full screen height minus header */
         flex-direction: column;
         background-color: #fff;
         width: 100%;
         text-align: center;
-        transition: 0.3s;
+        justify-content: center;
+        /* Center links vertically */
+        transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         padding: 20px 0;
         z-index: 99;
+        overflow-y: auto;
+        /* Allow scrolling if landscape */
+      }
+
+      .footer-links {
+        flex-direction: column;
+        /* Vertical stack for footer links */
+        gap: 16px;
       }
 
       .nav-links.active {
@@ -770,11 +821,9 @@
       }
 
       .nav-links a {
-        margin: 16px 0;
-        display: block;
-        font-size: 18px;
-        margin-left: 0;
-        /* Reset margin */
+        font-size: 22px;
+        /* Larger tap targets */
+        margin: 24px 0;
       }
 
       /* Font & Image Sizing */
@@ -812,6 +861,32 @@
         border-radius: 16px;
       }
     }
+
+    /* --- SMALL MOBILE OPTIMIZATIONS (< 480px) --- */
+    @media (max-width: 480px) {
+
+      nav,
+      .hero-split,
+      section,
+      .footer-content {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+
+      /* Allow even more width for content on very small screens */
+      .brand-container {
+        max-width: 85%;
+      }
+
+      .projects-grid,
+      .skills-grid,
+      .edu-grid {
+        gap: 24px;
+        /* Reduce gap to save space */
+        grid-template-columns: 1fr;
+        /* Force 1 column to prevent minmax overflow */
+      }
+    }
   </style>
 </head>
 
@@ -820,12 +895,9 @@
   <!-- NAV BAR -->
   <header>
     <nav>
-      <div
-        style="font-size: 22px; color: var(--text-main); display: flex; align-items: center; gap: 6px; cursor: pointer;"
-        onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-        <!-- Logo Text Style -->
-        <span style="font-weight: 500;">Risini</span>
-        <span style="font-weight: 400; color: var(--text-muted);">Dinara Kumarasinghe</span>
+      <div class="brand-container" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <span class="brand-first">Risini</span>
+        <span class="brand-last">Dinara Kumarasinghe</span>
       </div>
 
       <div class="hamburger">
